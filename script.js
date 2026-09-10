@@ -80,6 +80,8 @@ if (heroFrame && !reducedMotion) {
   });
 }
 
+const bitoVideoIds = ['28gF2wVUeBM', 'YIVEPAa7FWQ'];
+
 const youtubeVideos = [
   { videoId: '-JjrTeP06oA', title: 'Branding & Solutions', category: 'UGC', image: 'https://i.ytimg.com/vi/-JjrTeP06oA/hqdefault.jpg' },
   { videoId: '28gF2wVUeBM', title: 'Bito Screen 1', category: 'UGC', image: 'https://i.ytimg.com/vi/28gF2wVUeBM/hqdefault.jpg' },
@@ -96,11 +98,22 @@ const youtubeVideos = [
   { videoId: 'ZMX_ifL0C9Y', title: 'Aurelume Luma Renew Mask', category: 'AI Avatar', image: 'https://i.ytimg.com/vi/ZMX_ifL0C9Y/hqdefault.jpg' }
 ];
 
+function groupVideosBySection(videos) {
+  const groups = { bito: [], cgi: [], other: [] };
+  videos.forEach(function(video) {
+    if (bitoVideoIds.indexOf(video.videoId) !== -1) {
+      groups.bito.push(video);
+    } else if (video.category === 'CGI') {
+      groups.cgi.push(video);
+    } else {
+      groups.other.push(video);
+    }
+  });
+  return groups;
+}
+
 async function loadYouTubeVideos() {
-  const grid = document.getElementById('youtube-grid');
-  if (!grid) {
-    return;
-  }
+  let videos = youtubeVideos;
 
   try {
     const response = await fetch('/api/youtube');
@@ -108,15 +121,22 @@ async function loadYouTubeVideos() {
       throw new Error(`YouTube feed error: ${response.status}`);
     }
     const data = await response.json();
-    renderYouTubeGallery(Array.isArray(data.videos) && data.videos.length ? data.videos : youtubeVideos);
+    if (Array.isArray(data.videos) && data.videos.length) {
+      videos = data.videos;
+    }
   } catch (error) {
-    renderYouTubeGallery(youtubeVideos);
+    videos = youtubeVideos;
   }
+
+  const groups = groupVideosBySection(videos);
+  renderYouTubeGallery('youtube-grid', groups.other);
+  renderYouTubeGallery('cgi-grid', groups.cgi);
+  renderYouTubeGallery('bito-video-grid', groups.bito);
 }
 
-function renderYouTubeGallery(videos) {
-  const grid = document.getElementById('youtube-grid');
-  if (!grid) {
+function renderYouTubeGallery(gridId, videos) {
+  const grid = document.getElementById(gridId);
+  if (!grid || !videos.length) {
     return;
   }
 

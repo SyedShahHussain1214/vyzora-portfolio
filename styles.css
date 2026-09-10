@@ -657,6 +657,10 @@ img {
   justify-content: center;
 }
 
+.case-study-wrap-solo .youtube-grid {
+  margin-top: 40px;
+}
+
 .case-details {
   border-left: 1px solid var(--line);
   padding-left: 40px;
