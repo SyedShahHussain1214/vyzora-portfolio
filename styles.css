@@ -797,6 +797,28 @@ img {
   margin: 0;
 }
 
+.contact-methods {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+}
+
+.contact-methods a {
+  border-bottom: 1px solid transparent;
+  transition: color 260ms ease, border-color 260ms ease;
+}
+
+.contact-methods a:hover {
+  color: var(--gold-soft);
+  border-color: var(--gold-soft);
+}
+
 .site-footer {
   background: var(--bg);
   padding: 50px 56px;
