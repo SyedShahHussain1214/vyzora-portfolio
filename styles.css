@@ -468,8 +468,9 @@ img {
   background-image:
     linear-gradient(120deg, transparent 20%, rgba(212,166,71,0.3) 20%, rgba(212,166,71,0.6) 35%, transparent),
     radial-gradient(circle at 70% 30%, transparent, rgba(0,0,0,0.65)),
-    url("Opera Snapshot_2026-09-10_104734_www.instagram.com.png");
-  background-size: cover;
+    radial-gradient(circle at 35% 30%, rgba(212,166,71,0.5), transparent 42%),
+    linear-gradient(145deg, #211b12, #080808 68%);
+  background-size: auto, auto, auto, cover;
   background-position: center;
   transform: translate(var(--pointer-x, 0), var(--pointer-y, 0)) rotate(12deg);
   box-shadow: inset 0 0 80px rgba(0,0,0,0.8), 0 0 80px rgba(212,166,71,0.12);
