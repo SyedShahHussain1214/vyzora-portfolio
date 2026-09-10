@@ -2246,12 +2246,12 @@ img {
 
   .main-nav {
     position: fixed;
-    top: 80px;
-    right: 24px;
-    width: min(340px, calc(100vw - 48px));
+    top: 72px;
+    right: 20px;
+    width: min(320px, calc(100vw - 40px));
     flex-direction: column;
     align-items: stretch;
-    padding: 30px 24px;
+    padding: 22px 20px;
     border: 1px solid var(--line-gold);
     background: var(--bg);
     display: none;
@@ -2271,7 +2271,17 @@ img {
   }
 
   .hero-wrap {
-    padding-top: 130px;
+    min-height: auto;
+    padding: 112px 20px 56px;
+    gap: 28px;
+  }
+
+  .hero-frame {
+    min-height: 360px;
+  }
+
+  .hero-frame-screen {
+    width: min(320px, 82vw);
   }
 
   .hero-actions,
@@ -2306,6 +2316,7 @@ img {
 
   .section-heading h2 {
     max-width: 12ch;
+    font-size: clamp(44px, 12vw, 68px);
   }
 
   .ecosystem-aside {
@@ -2317,15 +2328,15 @@ img {
 
   .ecosystem-visual,
   .geo-visual {
-    min-height: 340px;
+    min-height: 280px;
   }
 
   .geo-copy h2 {
-    font-size: clamp(56px, 14vw, 78px);
+    font-size: clamp(42px, 11vw, 64px);
   }
 
   .geo-copy p {
-    font-size: clamp(24px, 5vw, 30px);
+    font-size: clamp(19px, 5vw, 26px);
   }
 
   .geo-flow-row {
@@ -2410,6 +2421,107 @@ img {
 
   .service-grid {
     width: min(100%, calc(100vw - 40px));
+  }
+
+  .intro-wrap,
+  .case-study-wrap,
+  .ecosystem-wrap,
+  .geo-wrap,
+  .youtube-grid,
+  .about-wrap,
+  .contact-wrap {
+    width: min(100%, calc(100vw - 40px));
+  }
+
+  .section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .hero-subtitle {
+    margin: 16px 0 26px;
+    font-size: clamp(18px, 5vw, 23px);
+  }
+
+  .hero-social {
+    margin-top: 28px;
+  }
+
+  .btn {
+    min-width: 0;
+    padding: 14px 18px;
+  }
+
+  .portfolio-card,
+  .portfolio-link {
+    min-height: 320px;
+  }
+
+  .portfolio-image {
+    min-height: 220px;
+  }
+
+  .case-study-visual,
+  .case-image {
+    min-height: 380px;
+  }
+
+  .case-image-content {
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+  }
+
+  .case-image-content h3 {
+    margin: 16px 0 14px;
+    font-size: clamp(42px, 12vw, 64px);
+  }
+
+  .service-item {
+    grid-template-columns: 56px 1fr;
+    padding: 24px 0;
+  }
+
+  .service-number {
+    font-size: 48px;
+  }
+
+  .youtube-card {
+    min-height: 0;
+  }
+
+  .youtube-content {
+    padding: 20px 18px;
+  }
+
+  .instagram-panel {
+    padding: 72px 20px;
+  }
+
+  .instagram-copy h2 {
+    font-size: clamp(44px, 12vw, 64px);
+  }
+
+  .instagram-copy p {
+    font-size: clamp(20px, 5vw, 26px);
+  }
+
+  .about-image-frame {
+    min-height: 360px;
+  }
+
+  .about-copy h2,
+  .contact-intro h2 {
+    font-size: clamp(44px, 12vw, 64px);
+  }
+
+  .about-copy p,
+  .contact-intro p {
+    font-size: clamp(20px, 5vw, 26px);
+  }
+
+  .contact-aside {
+    padding: 24px;
   }
 
   .hero-copy h1 {
