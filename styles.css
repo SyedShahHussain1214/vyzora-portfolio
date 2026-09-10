@@ -494,6 +494,17 @@ img {
   background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8));
 }
 
+.hero-orb-logo {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 34%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 18px rgba(212,166,71,0.55));
+}
+
 .image-shadow {
   position: absolute;
   width: 70%;
