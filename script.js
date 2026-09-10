@@ -36,8 +36,10 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+let revealObserver = null;
+
 if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(function(entries) {
+  revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -46,7 +48,7 @@ if ('IntersectionObserver' in window) {
   }, { threshold: 0.16 });
 
   document.querySelectorAll('.reveal').forEach(function(el) {
-    observer.observe(el);
+    revealObserver.observe(el);
   });
 } else {
   document.querySelectorAll('.reveal').forEach(function(el) {
@@ -80,105 +82,36 @@ if (heroFrame && !reducedMotion) {
 
 const youtubeVideos = [
   { videoId: '28gF2wVUeBM', title: 'Bito Screen 1', category: 'Food & Beverage / Content', image: 'https://i.ytimg.com/vi/28gF2wVUeBM/hqdefault.jpg' },
-  { videoId: 'N2c59hdhyFI', title: 'Sakoon-Perfume CGI ad', category: 'Perfume / CGI', image: 'https://i.ytimg.com/vi/N2c59hdhyFI/hqdefault.jpg' },
-  { videoId: 'MiNuuXdDjWg', title: '10 September 2026', category: 'Creative Production', image: 'https://i.ytimg.com/vi/MiNuuXdDjWg/hqdefault.jpg' },
-  { videoId: 'urAsTqWD0Qg', title: 'Sakoon Perfume CGI ad 2', category: 'Perfume / CGI', image: 'https://i.ytimg.com/vi/urAsTqWD0Qg/hqdefault.jpg' },
-  { videoId: 'AMY_-uERE3E', title: 'CGI ad-Beauty Brands Editions', category: 'Beauty / CGI', image: 'https://i.ytimg.com/vi/AMY_-uERE3E/hqdefault.jpg' },
-  { videoId: 'Mwct32P7F-8', title: 'EMPEROR-Energy Drink CGI ad', category: 'Energy Drink / CGI', image: 'https://i.ytimg.com/vi/Mwct32P7F-8/hqdefault.jpg' }
+  { videoId: 'YIVEPAa7FWQ', title: 'Bito Screen 2', category: 'Food & Beverage / Content', image: 'https://i.ytimg.com/vi/YIVEPAa7FWQ/hqdefault.jpg' },
+  { videoId: 'nHarODajKSU', title: 'VYZORA Showcased as a Super Car', category: 'Creative Production / Short', image: 'https://i.ytimg.com/vi/nHarODajKSU/hqdefault.jpg' },
+  { videoId: 'MiNuuXdDjWg', title: '10 September 2026', category: 'Creative Production / Short', image: 'https://i.ytimg.com/vi/MiNuuXdDjWg/hqdefault.jpg' },
+  { videoId: 'urAsTqWD0Qg', title: 'Sakoon Perfume CGI ad 2', category: 'Perfume / CGI / Short', image: 'https://i.ytimg.com/vi/urAsTqWD0Qg/hqdefault.jpg' },
+  { videoId: 'N2c59hdhyFI', title: 'Sakoon-Perfume CGI ad', category: 'Perfume / CGI / Short', image: 'https://i.ytimg.com/vi/N2c59hdhyFI/hqdefault.jpg' },
+  { videoId: 'AMY_-uERE3E', title: 'CGI ad-Beauty Brands Editions', category: 'Beauty / CGI / Short', image: 'https://i.ytimg.com/vi/AMY_-uERE3E/hqdefault.jpg' },
+  { videoId: 'Mwct32P7F-8', title: 'EMPEROR-Energy Drink CGI ad', category: 'Energy Drink / CGI / Short', image: 'https://i.ytimg.com/vi/Mwct32P7F-8/hqdefault.jpg' },
+  { videoId: 'kDh1X1IvjNY', title: 'EMPEROR Perfume-CGI ad', category: 'Perfume / CGI / Short', image: 'https://i.ytimg.com/vi/kDh1X1IvjNY/hqdefault.jpg' },
+  { videoId: 'gM9uw0oeHdE', title: '2 September 2026', category: 'Creative Production / Short', image: 'https://i.ytimg.com/vi/gM9uw0oeHdE/hqdefault.jpg' },
+  { videoId: 'Q_WILFZENhk', title: 'AURELUME Petal Drop Tint — AI Avatar Ad', category: 'Beauty / AI Avatar / Short', image: 'https://i.ytimg.com/vi/Q_WILFZENhk/hqdefault.jpg' },
+  { videoId: 'ZMX_ifL0C9Y', title: 'AURELUME Luma Renew Mask — AI Avatar Ad', category: 'Beauty / AI Avatar / Short', image: 'https://i.ytimg.com/vi/ZMX_ifL0C9Y/hqdefault.jpg' }
 ];
 
-function loadYouTubeVideos() {
+async function loadYouTubeVideos() {
   const grid = document.getElementById('youtube-grid');
   if (!grid) {
     return;
   }
 
-  renderYouTubeGallery(youtubeVideos);
-}
-
-
-const ecosystemContent = {
-  branding: {
-    title: 'BRANDING',
-    description: 'Identity, voice and the creative foundation that lets a business become recognizable.',
-    tags: ['Identity Systems', 'Brand Strategy', 'Creative Direction'],
-    projects: 'BITO · AURELUME · SAKOON'
-  },
-  content: {
-    title: 'CONTENT',
-    description: 'Premium social, campaign and product storytelling designed for attention and recall.',
-    tags: ['Social Content', 'Campaigns', 'Video Production'],
-    projects: 'BITO · FOOD STORIES · BEAUTY CGI'
-  },
-  websites: {
-    title: 'WEBSITES',
-    description: 'Digital homes that present the brand clearly and convert the visit into momentum.',
-    tags: ['Web Design', 'Digital Experience', 'E-Commerce'],
-    projects: 'STORE SYSTEMS · DIGITAL LAUNCH'
-  },
-  marketing: {
-    title: 'MARKETING',
-    description: 'Strategy, channel planning and performance-minded creative to grow demand.',
-    tags: ['Digital Marketing', 'Social Media', 'Growth'],
-    projects: 'AD CAMPAIGNS · AWARENESS · PERFORMANCE'
-  },
-  advertising: {
-    title: 'ADVERTISING',
-    description: 'Creative production built for campaigns, product presence and digital attention.',
-    tags: ['Product Advertising', 'CGI', 'Motion'],
-    projects: 'SAKOON · EMPEROR · BEAUTY BRANDS'
-  },
-  performance: {
-    title: 'PERFORMANCE',
-    description: 'Creative testing, content optimization and conversion systems around business objectives.',
-    tags: ['Optimization', 'Creative Testing', 'Conversion'],
-    projects: 'SHOPIFY · CONTENT SYSTEMS · SOCIAL'
-  },
-  growth: {
-    title: 'GROWTH',
-    description: 'AI-era discovery, GEO, content visibility and digital momentum working together.',
-    tags: ['GEO', 'AI Discovery', 'Modern Visibility'],
-    projects: 'SEARCH LANDSCAPE · DISCOVERY · DIGITAL SYSTEMS'
+  try {
+    const response = await fetch('/api/youtube');
+    if (!response.ok) {
+      throw new Error(`YouTube feed error: ${response.status}`);
+    }
+    const data = await response.json();
+    renderYouTubeGallery(Array.isArray(data.videos) && data.videos.length ? data.videos : youtubeVideos);
+  } catch (error) {
+    renderYouTubeGallery(youtubeVideos);
   }
-};
-
-const ecosystemNodes = Array.from(document.querySelectorAll('.ecosystem-node'));
-const ecosystemTitle = document.getElementById('ecosystemTitle');
-const ecosystemDescription = document.getElementById('ecosystemDescription');
-const ecosystemTags = document.getElementById('ecosystemTags');
-const ecosystemProjects = document.getElementById('ecosystemProjects');
-
-function setEcosystem(type) {
-  if (!ecosystemContent[type]) {
-    return;
-  }
-
-  const section = ecosystemContent[type];
-  ecosystemTitle.textContent = section.title;
-  ecosystemDescription.textContent = section.description;
-  ecosystemProjects.textContent = section.projects;
-  ecosystemTags.innerHTML = section.tags.map(function(item) {
-    return `<span>${item}</span>`;
-  }).join('');
 }
-
-ecosystemNodes.forEach(function(node) {
-  node.addEventListener('mouseenter', function() {
-    const type = node.dataset.ecosystem;
-    ecosystemNodes.forEach(function(item) {
-      item.classList.toggle('active', item === node);
-    });
-    setEcosystem(type);
-  });
-
-  node.addEventListener('focus', function() {
-    const type = node.dataset.ecosystem;
-    ecosystemNodes.forEach(function(item) {
-      item.classList.toggle('active', item === node);
-    });
-    setEcosystem(type);
-  });
-});
 
 function renderYouTubeGallery(videos) {
   const grid = document.getElementById('youtube-grid');
@@ -187,7 +120,7 @@ function renderYouTubeGallery(videos) {
   }
 
   grid.innerHTML = videos.map(function(video, index) {
-    return `<article class="youtube-card reveal visible">
+    return `<article class="youtube-card reveal">
       <div class="youtube-embed-wrap">
         <iframe src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1" title="${video.title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
@@ -197,6 +130,76 @@ function renderYouTubeGallery(videos) {
       </div>
     </article>`;
   }).join('');
+
+  const cards = grid.querySelectorAll('.youtube-card');
+  if (revealObserver) {
+    cards.forEach(function(card) {
+      revealObserver.observe(card);
+    });
+  } else {
+    cards.forEach(function(card) {
+      card.classList.add('visible');
+    });
+  }
 }
 
 loadYouTubeVideos();
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxClose = document.querySelector('.lightbox-close');
+let lastFocusedTrigger = null;
+
+function openLightbox(trigger) {
+  const image = trigger.getAttribute('data-image');
+  if (!image || !lightbox) {
+    return;
+  }
+
+  lastFocusedTrigger = trigger;
+  lightboxImage.src = image;
+  lightboxImage.alt = trigger.getAttribute('data-caption') || 'Vyzora project image';
+  lightboxCaption.textContent = trigger.getAttribute('data-caption') || '';
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('lightbox-open');
+  lightboxClose.focus();
+}
+
+function closeLightbox() {
+  if (!lightbox) {
+    return;
+  }
+
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('lightbox-open');
+  if (lastFocusedTrigger) {
+    lastFocusedTrigger.focus();
+  }
+}
+
+document.querySelectorAll('.lightbox-trigger').forEach(function(trigger) {
+  trigger.addEventListener('click', function() {
+    openLightbox(trigger);
+  });
+});
+
+if (lightbox) {
+  lightbox.addEventListener('click', function(event) {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+}
+
+if (lightboxClose) {
+  lightboxClose.addEventListener('click', closeLightbox);
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
+    closeLightbox();
+  }
+});
