@@ -13,6 +13,11 @@ function updateHeader() {
 window.addEventListener('scroll', updateHeader);
 updateHeader();
 
+function closeNavigation() {
+  document.body.classList.remove('nav-open');
+  mobileToggle.setAttribute('aria-expanded', 'false');
+}
+
 mobileToggle.addEventListener('click', function() {
   const isOpen = document.body.classList.toggle('nav-open');
   mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
@@ -20,9 +25,15 @@ mobileToggle.addEventListener('click', function() {
 
 nav.querySelectorAll('a').forEach(function(link) {
   link.addEventListener('click', function() {
-    document.body.classList.remove('nav-open');
-    mobileToggle.setAttribute('aria-expanded', 'false');
+    closeNavigation();
   });
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeNavigation();
+    mobileToggle.focus();
+  }
 });
 
 if ('IntersectionObserver' in window) {
@@ -57,11 +68,13 @@ window.addEventListener('scroll', updateScrollProgress);
 updateScrollProgress();
 
 const heroFrame = document.querySelector('.hero-frame-image');
-if (heroFrame) {
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (heroFrame && !reducedMotion) {
   window.addEventListener('mousemove', function(event) {
     const x = Math.round((event.clientX / Math.max(window.innerWidth, 1)) * 18 - 9);
     const y = Math.round((event.clientY / Math.max(window.innerHeight, 1)) * 18 - 9);
-    heroFrame.style.transform = `translate(${x * 0.45}px, ${y * 0.45}px)`;
+    heroFrame.style.setProperty('--pointer-x', `${x * 0.45}px`);
+    heroFrame.style.setProperty('--pointer-y', `${y * 0.45}px`);
   });
 }
 
