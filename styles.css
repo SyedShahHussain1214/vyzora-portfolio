@@ -814,6 +814,10 @@ img {
   transition: color 260ms ease, border-color 260ms ease;
 }
 
+.contact-methods .slash {
+  color: var(--gold-soft);
+}
+
 .contact-methods a:hover {
   color: var(--gold-soft);
   border-color: var(--gold-soft);
