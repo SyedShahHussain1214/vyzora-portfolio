@@ -933,7 +933,7 @@ img {
 }
 
 .portfolio-image-bito {
-  background-image: url("bito images/Opera Snapshot_2026-09-10_104734_www.instagram.com.png");
+  background-image: url("food1.jpg");
 }
 
 .portfolio-image-aure {
@@ -965,7 +965,7 @@ img {
   background-image: var(--image-url, none);
 }
 
-.portfolio-image-bito::after {background-image: url("bito images/Opera Snapshot_2026-09-10_104813_www.instagram.com.png")}
+.portfolio-image-bito::after {background-image: url("food1.jpg")}
 .portfolio-image-aure::after {background-image: url("beauty2.jpg")}
 .portfolio-image-sakoon::after {background-image: url("test-perfume.jpg")}
 .portfolio-image-emperor::after {background-image: url("test-energy.jpg")}
@@ -1003,7 +1003,7 @@ img {
 }
 
 .case-image-bito {
-  background-image: url("bito images/Opera Snapshot_2026-09-10_104840_www.instagram.com.png");
+  background-image: url("food1.jpg");
 }
 
 .case-image::before {
@@ -1120,15 +1120,15 @@ img {
 }
 
 .case-strip-photo-one {
-  background-image: url("bito images/Opera Snapshot_2026-09-10_104734_www.instagram.com.png");
+  background-image: url("food1.jpg");
 }
 
 .case-strip-photo-two {
-  background-image: url("bito images/Opera Snapshot_2026-09-10_104813_www.instagram.com.png");
+  background-image: url("test-food.jpg");
 }
 
 .case-strip-photo-three {
-  background-image: url("bito images/Opera Snapshot_2026-09-10_104840_www.instagram.com.png");
+  background-image: url("test-food-final.jpg");
 }
 
 .services {

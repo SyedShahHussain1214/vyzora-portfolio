@@ -25,17 +25,23 @@ nav.querySelectorAll('a').forEach(function(link) {
   });
 });
 
-const observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.16 });
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.16 });
 
-document.querySelectorAll('.reveal').forEach(function(el) {
-  observer.observe(el);
-});
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    observer.observe(el);
+  });
+} else {
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    el.classList.add('visible');
+  });
+}
 
 const scrollProgress = document.createElement('div');
 scrollProgress.className = 'scroll-progress';
@@ -68,24 +74,13 @@ const youtubeVideos = [
   { videoId: 'Mwct32P7F-8', title: 'EMPEROR-Energy Drink CGI ad', category: 'Energy Drink / CGI', image: 'https://i.ytimg.com/vi/Mwct32P7F-8/hqdefault.jpg' }
 ];
 
-async function loadYouTubeVideos() {
+function loadYouTubeVideos() {
   const grid = document.getElementById('youtube-grid');
   if (!grid) {
     return;
   }
 
-  try {
-    const response = await fetch('/api/youtube', { headers: { Accept: 'application/json' } });
-    if (!response.ok) {
-      throw new Error('No API route available');
-    }
-
-    const payload = await response.json();
-    const videos = Array.isArray(payload.videos) ? payload.videos : youtubeVideos;
-    renderYouTubeGallery(videos);
-  } catch (error) {
-    renderYouTubeGallery(youtubeVideos);
-  }
+  renderYouTubeGallery(youtubeVideos);
 }
 
 
@@ -179,9 +174,9 @@ function renderYouTubeGallery(videos) {
   }
 
   grid.innerHTML = videos.map(function(video, index) {
-    return `<article class="youtube-card reveal">
+    return `<article class="youtube-card reveal visible">
       <div class="youtube-embed-wrap">
-        <iframe src="https://www.youtube.com/embed/${video.videoId}?rel=0" title="${video.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1" title="${video.title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
       <div class="youtube-content">
         <span class="youtube-title">${video.title}</span>
